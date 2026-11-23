@@ -9,6 +9,7 @@
 | 在 MusicBrainz 中搜索 | 以曲名和各艺术家的独立条件搜索 recording |
 | 在 Discogs 中搜索 | 搜索“艺术家 曲名” |
 | 在 YouTube 中搜索 | 搜索“艺术家 曲名” |
+| 在哔哩哔哩中搜索 | 搜索“艺术家 曲名” |
 | 复制 艺术家 - 曲名 | 例如 `The Beatles - Come Together` |
 | 复制专辑信息 | 例如 `The Beatles - Abbey Road` |
 

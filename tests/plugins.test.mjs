@@ -26,9 +26,10 @@ function load(name, request = async () => { throw new Error("unexpected network"
 }
 const asJson = (value) => JSON.parse(JSON.stringify(value));
 
-test("Music Tools uses only UI permission and five menus; handles multiple artists and unicode", async () => {
+test("Music Tools uses only UI permission and six menus; handles multiple artists and unicode", async () => {
   const { handlers, registration } = load("music-tools");
-  assert.equal(registration.menus.length, 5);
+  assert.equal(registration.menus.length, 6);
+  assert.equal(registration.menus.find(({ id }) => id === "bilibili")?.label, "在哔哩哔哩中搜索");
   assert.equal(registration.controls, undefined);
   assert.match(scripts["music-tools"], /@grant\s+ui\s*\n/);
   const action = handlers.get("menuClick");
@@ -39,6 +40,13 @@ test("Music Tools uses only UI permission and five menus; handles multiple artis
     const url = new URL((await action({ menuId, track })).openUrl);
     assert.equal(url.searchParams.get(menuId === "discogs" ? "q" : "search_query"), `艺术家 / Björk ${track.title}`);
   }
+  const bilibili = new URL((await action({ menuId: "bilibili", track })).openUrl);
+  assert.equal(bilibili.origin, "https://search.bilibili.com");
+  assert.equal(bilibili.pathname, "/all");
+  assert.deepEqual([...bilibili.searchParams], [["keyword", `艺术家 / Björk ${track.title}`]]);
+  const titleOnly = await action({ menuId: "bilibili", track: { title: "Song" } });
+  assert.equal(new URL(titleOnly.openUrl).searchParams.get("keyword"), "Song");
+  assert.deepEqual(asJson(await action({ menuId: "bilibili", track: {} })), { toast: "这首歌没有曲名信息" });
   const mb = new URL((await action({ menuId: "musicbrainz", track })).openUrl);
   assert.equal(mb.searchParams.get("type"), "recording");
   assert.match(mb.searchParams.get("query"), /\\"夜\\"/);
@@ -52,6 +60,7 @@ test("Music Tools uses only UI permission and five menus; handles multiple artis
 test("English menu text follows host locale", () => {
   const { registration } = load("music-tools", undefined, { locale: "en-US" });
   assert.equal(registration.menus[0].label, "Search on MusicBrainz");
+  assert.equal(registration.menus.find(({ id }) => id === "bilibili")?.label, "Search on Bilibili");
 });
 
 test("search preserves album variants, duration, credits; safely quotes keyword; deduplicates requests", async () => {

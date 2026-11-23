@@ -1,15 +1,15 @@
 /**
  * @name        Music Tools
  * @id          atom.music-tools
- * @version     1.0.1
- * @description 在 MusicBrainz、Discogs、YouTube 搜索歌曲，复制歌曲和专辑信息。
+ * @version     1.0.2
+ * @description 在 MusicBrainz、Discogs、YouTube、哔哩哔哩搜索歌曲，复制歌曲和专辑信息。
  * @type        control
  * @apiLevel    2
  * @grant       ui
  * @author      bnqzzdf
  * @homepage    https://github.com/bnqzzdf/splayer-atom-plugin
  * @updateUrl   https://raw.githubusercontent.com/bnqzzdf/splayer-atom-plugin/main/plugins/music-tools/plugin.js
- * @changelog   首次公开发布，新增插件主页与更新地址。
+ * @changelog   在歌曲菜单中新增哔哩哔哩搜索。
  */
 (() => {
   "use strict";
@@ -20,6 +20,7 @@
     { id: "musicbrainz", label: text("在 MusicBrainz 中搜索", "Search on MusicBrainz") },
     { id: "discogs", label: text("在 Discogs 中搜索", "Search on Discogs") },
     { id: "youtube", label: text("在 YouTube 中搜索", "Search on YouTube") },
+    { id: "bilibili", label: text("在哔哩哔哩中搜索", "Search on Bilibili") },
     { id: "copy-track", label: text("复制 艺术家 - 曲名", "Copy artist - title") },
     { id: "copy-album", label: text("复制专辑信息", "Copy album information") },
   ];
@@ -60,6 +61,9 @@
     }
     if (menuId === "discogs") {
       return { openUrl: `https://www.discogs.com/search/?q=${encodeURIComponent(query)}&type=all` };
+    }
+    if (menuId === "bilibili") {
+      return { openUrl: `https://search.bilibili.com/all?keyword=${encodeURIComponent(query)}` };
     }
     return { openUrl: `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}` };
   });

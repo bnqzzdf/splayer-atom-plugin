@@ -5,7 +5,7 @@
 | 插件 | 功能 | API level | 权限 |
 | --- | --- | --- | --- |
 | [MusicBrainz Cover](plugins/musicbrainz-cover/README.md) | 无封面曲目的 MusicBrainz / Cover Art Archive 封面兜底 | 1 | 音源插件自动获得 network |
-| [Music Tools](plugins/music-tools/README.md) | 歌曲菜单中的 MusicBrainz、Discogs、YouTube 搜索与复制 | 2 | ui |
+| [Music Tools](plugins/music-tools/README.md) | 歌曲菜单中的 MusicBrainz、Discogs、YouTube、哔哩哔哩搜索与复制 | 2 | ui |
 
 ## 安装
 

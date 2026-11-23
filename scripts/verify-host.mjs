@@ -72,12 +72,17 @@ if (report.checks.some((entry) => !entry.ok)) {
 
 const track = { id: "plugin-verification", source: "local", title: "Come Together",
   artists: [{ name: "The Beatles" }], album: { name: "Abbey Road" }, duration: 259000 };
-for (const menuId of ["musicbrainz", "discogs", "youtube", "copy-track", "copy-album"]) {
+for (const menuId of ["musicbrainz", "discogs", "youtube", "bilibili", "copy-track", "copy-album"]) {
   await check(`menu ${menuId}`, async () => {
     const result = await request("/plugins/invoke-menu", { pluginId: "atom.music-tools", menuId, track });
     assert.equal(result.ok, true);
     if (menuId.startsWith("copy")) assert.match(result.copyText, /The Beatles - /);
     else assert.match(result.openUrl, /^https:\/\//);
+    if (menuId === "bilibili") {
+      const url = new URL(result.openUrl);
+      assert.equal(`${url.origin}${url.pathname}`, "https://search.bilibili.com/all");
+      assert.equal(url.searchParams.get("keyword"), "The Beatles Come Together");
+    }
     return result;
   });
 }
