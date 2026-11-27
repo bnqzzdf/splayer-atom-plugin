@@ -52,3 +52,10 @@
 v1.0.1 补充公开仓库主页、稳定的 raw 更新地址和更新说明；插件功能保持初版行为。宿主实测结果仍对应 2026-09-30 的测试环境，不代表本次重新执行了远端宿主验证。
 
 本次重新运行 `npm test`（10 项通过）和 `npm run check`（通过），并完成待提交文件的 `git diff --cached --check`。
+
+## Liner Notes 1.0.0（2026-11-27）
+
+- `npm test` 通过 15 项，其中 5 项覆盖 Liner Notes 的注册、宿主匹配字段、两种评论分页、来源回退和缓存。`npm run check` 通过三个插件的语法检查。
+- 本地 `serve` 的三个脚本入口均返回 HTTP 200，响应内容与对应源码一致。
+- 使用 Atom v1.3.2 发布包在 WSL 中启动隔离的 Core 实例，执行 `verify-host.mjs --install-from … --liner-notes`，通过安装、源码 SHA1、评论来源及热门和最新标签验证。Core 通过临时本地代理访问公共数据源。
+- 《Come Together》的热门接口返回 Wikipedia 背景、唱片档案、制作人员和 CAA 扫描四张资料卡，最新接口返回所匹配录音的发行记录。

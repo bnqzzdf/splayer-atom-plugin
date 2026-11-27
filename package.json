@@ -2,12 +2,12 @@
   "name": "splayer-atom-plugin",
   "version": "1.0.1",
   "private": true,
-  "description": "Standalone MusicBrainz Cover and Music Tools plugins for SPlayer Atom",
+  "description": "Standalone MusicBrainz Cover, Music Tools, and Liner Notes plugins for SPlayer Atom",
   "type": "module",
   "engines": { "node": ">=22.19.0" },
   "scripts": {
     "test": "node --test",
-    "check": "node --check plugins/musicbrainz-cover/plugin.js && node --check plugins/music-tools/plugin.js",
+    "check": "node --check plugins/musicbrainz-cover/plugin.js && node --check plugins/music-tools/plugin.js && node --check plugins/liner-notes/plugin.js",
     "serve": "node scripts/serve.mjs",
     "verify": "node scripts/verify-host.mjs"
   }

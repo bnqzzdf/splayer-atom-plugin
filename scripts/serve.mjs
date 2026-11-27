@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 const files = new Map([
   ["/musicbrainz-cover.js", new URL("../plugins/musicbrainz-cover/plugin.js", import.meta.url)],
   ["/music-tools.js", new URL("../plugins/music-tools/plugin.js", import.meta.url)],
+  ["/liner-notes.js", new URL("../plugins/liner-notes/plugin.js", import.meta.url)],
 ]);
 const port = Number(process.env.PORT || 8765);
 const server = createServer(async (request, response) => {
